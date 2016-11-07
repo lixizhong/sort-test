@@ -43,9 +43,7 @@ public class Sort {
         for (int i = 1; i < array.length; i++) {
             for(int j=i; j>0; j--) {
                 if(array[j] < array[j-1]) {
-                    int tmp = array[j];
-                    array[j] = array[j-1];
-                    array[j-1] = tmp;
+                    swap(array, j, j-1);
                 }else{
                     break;
                 }
@@ -67,8 +65,7 @@ public class Sort {
         }
     }
     //非递归快排(使用栈)
-    public static void subQuickSort2(int[] array, int low, int high) {
-
+    private static void subQuickSort2(int[] array, int low, int high) {
         class Range {
             public int low;
             public int high;
@@ -76,10 +73,8 @@ public class Sort {
                 this.low = low; this.high = high;
             }
         }
-
         Stack<Range> stack = new Stack<Range>();
         stack.push(new Range(low, high));
-
         while( ! stack.empty()){
             Range range = stack.pop();
             int p = partion(array, range.low, range.high);
@@ -93,8 +88,7 @@ public class Sort {
     }
 
     //非递归快排(使用队列)
-    public static void subQuickSort3(int[] array, int low, int high) {
-
+    private static void subQuickSort3(int[] array, int low, int high) {
         class Range {
             public int low;
             public int high;
@@ -102,10 +96,8 @@ public class Sort {
                 this.low = low; this.high = high;
             }
         }
-
         Queue<Range> queue = new LinkedList<Range>();
         queue.add(new Range(low, high));
-
         while( ! queue.isEmpty()){
             Range range = queue.remove();
             int p = partion(array, range.low, range.high);
@@ -118,7 +110,7 @@ public class Sort {
         }
     }
 
-    public static int partion(int[] array, int low, int high){
+    private static int partion(int[] array, int low, int high){
         int key = array[low];
         while(low < high) {
             while(low < high && array[high] >= key){
@@ -135,8 +127,22 @@ public class Sort {
     }
 
     private static void swap(int[] array, int i, int j){
+        if(i == j) return;
         int t = array[i];
         array[i] = array[j];
         array[j] = t;
     }
+
+    public static void selectionSort(int[] array){
+        for(int i=0; i<array.length-1; i++){
+            int index = i;
+            for(int j=i+1; j<array.length; j++){
+                if(array[j] < array[index]) {
+                    index = j;
+                }
+            }
+            swap(array, i, index);
+        }
+    }
+
 }

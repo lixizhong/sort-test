@@ -1,6 +1,5 @@
 import org.junit.*;
 
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -8,36 +7,37 @@ import java.util.Random;
  */
 public class TestSort {
     private static int[] array;
-    private static int len = 10000000;
-    private int[] arrayCopy;
+    private static int len = 10000;
+    private int[] arrayToSort;
     private long startTime;
+
     @BeforeClass
     public static void generateArray() {
         array = new int[len];
         for(int i=0; i<len; i++){
-            int n = new Random().nextInt(999999999);
+            int n = new Random().nextInt(99999);
             array[i] = n;
         }
         System.out.println("init finished");
     }
     @Before
     public void countDown(){
-        arrayCopy = new int[len];
-        System.arraycopy(array, 0, arrayCopy, 0, len);
+        arrayToSort = new int[len];
+        System.arraycopy(array, 0, arrayToSort, 0, len);
         startTime = System.currentTimeMillis();
-        displayArray(arrayCopy);
+        displayArray(arrayToSort);
     }
     @After
     public void countUp(){
         long endTime = System.currentTimeMillis();
-        displayArray(arrayCopy);
-        Assert.assertTrue(checkArray(arrayCopy));
+        displayArray(arrayToSort);
+        Assert.assertTrue(checkArray(arrayToSort));
         System.out.println("userd time: " + (endTime - startTime));
     }
 
     public boolean checkArray(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            if(i > 0 && array[i] < array[i - 1]) {
+        for (int i = 1; i < array.length; i++) {
+            if(array[i] < array[i - 1]) {
                 return false;
             }
         }
@@ -56,31 +56,31 @@ public class TestSort {
 
     @Test
     public void testBubbleSort(){
-        System.out.println("bubble:");
-        Sort.bubbleSort(arrayCopy);
+        System.out.println("bubble sort:");
+        Sort.bubbleSort(arrayToSort);
     }
 
     @Test
     public void testBubbleSortImprove(){
         System.out.println("bubble improve:");
-        Sort.bubbleSortImprove(arrayCopy);
+        Sort.bubbleSortImprove(arrayToSort);
     }
 
     @Test
     public void testInsertionSort(){
-        System.out.println("insertion:");
-        Sort.insertionSort(arrayCopy);
+        System.out.println("insertion sort:");
+        Sort.insertionSort(arrayToSort);
     }
 
     @Test
     public void testQuickSort() {
-        System.out.println("quick:");
-        Sort.quickSort(arrayCopy);
+        System.out.println("quick sort:");
+        Sort.quickSort(arrayToSort);
     }
 
     @Test
-    public void testArraySort() {
-        System.out.println("array.sort");
-        Arrays.sort(arrayCopy);
+    public void testSelectionSort() {
+        System.out.println("selection sort:");
+        Sort.selectionSort(arrayToSort);
     }
 }

@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class TestSort {
     private static int[] array;
-    private static int len = 1000000;
+    private static int len = 1000;
     private int[] arrayToSort;
     private static int[] arrayRightSort;
     private long startTime;

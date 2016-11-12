@@ -8,7 +8,7 @@ import java.util.Random;
  */
 public class TestSort {
     private static int[] array;
-    private static int len = 1000;
+    private static int len = 5;
     private int[] arrayToSort;
     private static int[] arrayRightSort;
     private long startTime;
@@ -17,7 +17,7 @@ public class TestSort {
     public static void generateArray() {
         array = new int[len];
         for(int i=0; i<len; i++){
-            int n = new Random().nextInt(999999999);
+            int n = new Random().nextInt(10);
             array[i] = n;
         }
         arrayRightSort = new int[len];
@@ -55,7 +55,7 @@ public class TestSort {
 
     public static void displayArray(int [] array) {
         if(true){
-            return;
+            //return;
         }
         for (int i = 0; i < array.length; i++) {
             int n = array[i];
@@ -105,4 +105,5 @@ public class TestSort {
         System.out.println("merge sort:");
         Sort.mergeSort(arrayToSort);
     }
+
 }
